@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="angular.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+    <title>Banking App</title>
+  </head>
+    
+  <body class="text-center">
+    <form class="form-signin">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" ng-model="Username" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" ng-model="password" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+      <h1>{{password}}</h1>
+          
+         
+  </body>
+</html>
+
+
+
