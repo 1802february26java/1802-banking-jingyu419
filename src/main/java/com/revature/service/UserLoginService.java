@@ -11,7 +11,10 @@ public class UserLoginService {
 	    public User userLogin(User user){
 	    	
 	    	UserRepositoryJdbc repository = new UserRepositoryJdbc();
+	    	
 	    	logger.trace("We are in UserLoginService, return User object back to UserController class now");
+	    	
 			return repository.findByUserName(user.getUserName());
 	    }
+	    
 }

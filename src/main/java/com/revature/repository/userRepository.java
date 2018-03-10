@@ -10,5 +10,4 @@ public interface UserRepository {
 	  
 	  public User findByUserName(String userName);
 	  
-	  public Set<User> selectAll();
 }

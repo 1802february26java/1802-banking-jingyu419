@@ -7,18 +7,16 @@ public class User {
 	    private String lastName;
 	    private String userName;
 	    private String password;
-	    private Long accountId;
 		
 	    public User(){}
 
-		public User(Long userId, String firstName, String lastName, String userName, String password, Long accountId) {
+		public User(Long userId, String firstName, String lastName, String userName, String password) {
 			super();
 			this.userId = userId;
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.userName = userName;
 			this.password = password;
-			this.accountId = accountId;
 		}
 
 		public Long getUserId() {
@@ -59,14 +57,6 @@ public class User {
 
 		public void setPassword(String password) {
 			this.password = password;
-		}
-
-		public Long getAccountId() {
-			return accountId;
-		}
-
-		public void setAccountId(Long accountId) {
-			this.accountId = accountId;
 		}
 
 		@Override
@@ -115,12 +105,9 @@ public class User {
 		@Override
 		public String toString() {
 			return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
-					+ userName + ", password=" + password + ", accountId=" + accountId + "]";
+					+ userName + ", password=" + password + "]";
 		}
-	    
-	    
-	    
-	    
-	    
+
+		
 	    
 }

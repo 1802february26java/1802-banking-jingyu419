@@ -17,8 +17,34 @@ public class UserRepositoryJdbc implements UserRepository {
 	
 	@Override
 	public boolean insert(User user) {
-		// TODO Auto-generated method stub
+		
+        logger.trace("Inserting new user.");
+		
+		try(Connection connection = ConnectionUtil.getConnection()) {
+			
+			int parameterIndex = 0;
+
+			String sql = "INSERT INTO USERS(U_ID,U_FIRST_NAME,U_LAST_NAME,U_USER_NAME,U_PASS_WORD) VALUES(NULL,?,?,?,?)";
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.setString(++parameterIndex, user.getFirstName());
+			statement.setString(++parameterIndex, user.getLastName());
+			statement.setString(++parameterIndex, user.getUserName());
+			statement.setString(++parameterIndex, user.getPassword());
+
+			if(statement.executeUpdate() > 0) {
+				logger.trace("Successfully insert new user.");
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			logger.error("Exception thrown while inserting new user", e);
+		}
+		
 		return false;
+		
 	}
 
 	@Override
@@ -44,8 +70,7 @@ public class UserRepositoryJdbc implements UserRepository {
 						result.getString("U_FIRST_NAME"),
 						result.getString("U_LAST_NAME"),
 						result.getString("U_USER_NAME"),
-						result.getString("U_PASS_WORD"),
-						result.getLong("A_ID")
+						result.getString("U_PASS_WORD")
 						);
 			}
 			
@@ -55,11 +80,6 @@ public class UserRepositoryJdbc implements UserRepository {
 		
 		return null;
 	}
-
-	@Override
-	public Set<User> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
+
 }
