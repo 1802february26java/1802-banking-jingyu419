@@ -104,6 +104,7 @@ public class AccountRepositoryJdbc implements AccountRepository {
 						result.getDouble("A_BALANCE")
 						));
 			}
+			logger.trace(set);
 			return set;
 			
 			

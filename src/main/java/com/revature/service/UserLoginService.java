@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import org.apache.log4j.Logger;
+
 import com.revature.model.User;
 import com.revature.repository.UserRepositoryJdbc;
 
@@ -14,7 +15,11 @@ public class UserLoginService {
 	    	
 	    	logger.trace("We are in UserLoginService, return User object back to UserController class now");
 	    	
-			return repository.findByUserName(user.getUserName());
+	    	User result = repository.findByUserName(user.getUserName());
+	    	
+	    	logger.trace("UserLoginService: "+result);
+	    	
+			return result;
 	    }
 	    
 }
