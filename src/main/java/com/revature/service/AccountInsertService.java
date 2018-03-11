@@ -4,6 +4,12 @@ import org.apache.log4j.Logger;
 import com.revature.model.Account;
 import com.revature.repository.AccountRepositoryJdbc;
 
+/**
+ * 
+ * @author jingyu
+ * This class inserts a new account.
+ *
+ */
 public class AccountInsertService {
 
 	 private static Logger logger = Logger.getLogger(AccountInsertService.class);

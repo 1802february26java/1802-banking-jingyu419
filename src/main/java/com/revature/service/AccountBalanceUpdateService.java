@@ -6,6 +6,12 @@ import com.revature.model.Account;
 import com.revature.model.User;
 import com.revature.repository.AccountRepositoryJdbc;
 
+/**
+ * 
+ * @author jingyu
+ * This class update account balance. 
+ *
+ */
 public class AccountBalanceUpdateService {
 
 	 private static Logger logger = Logger.getLogger(AccountBalanceUpdateService.class);

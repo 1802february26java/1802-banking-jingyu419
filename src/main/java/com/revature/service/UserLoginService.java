@@ -5,6 +5,12 @@ import org.apache.log4j.Logger;
 import com.revature.model.User;
 import com.revature.repository.UserRepositoryJdbc;
 
+/**
+ * 
+ * @author jingyu
+ * This class is used to check if the user is existed in database or not.
+ *
+ */
 public class UserLoginService {
 
 	    private static Logger logger = Logger.getLogger(UserLoginService.class);

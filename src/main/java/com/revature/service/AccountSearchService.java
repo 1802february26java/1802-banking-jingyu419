@@ -8,6 +8,12 @@ import com.revature.model.Account;
 import com.revature.model.User;
 import com.revature.repository.AccountRepositoryJdbc;
 
+/**
+ * 
+ * @author jingyu
+ *
+ *This class is used to search accounts.
+ */
 public class AccountSearchService {
 
 	  private static Logger logger = Logger.getLogger(AccountSearchService.class);

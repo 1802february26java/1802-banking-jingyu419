@@ -3,7 +3,12 @@ package com.revature.service;
 import org.apache.log4j.Logger;
 import com.revature.model.User;
 import com.revature.repository.UserRepositoryJdbc;
-
+/**
+ * 
+ * @author jingyu
+ * This class insert a new user.
+ *
+ */
 public class UserInsertService {
 
 	 private static Logger logger = Logger.getLogger(UserLoginService.class);

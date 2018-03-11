@@ -7,6 +7,12 @@ import org.apache.log4j.Logger;
 import com.revature.model.Account;
 import com.revature.model.User;
 
+/**
+ * 
+ * @author jingyu
+ * This class has necessary methods which controller will use.
+ *
+ */
 public class AccountService {
 	
 	private static Logger logger = Logger.getLogger(AccountService.class);

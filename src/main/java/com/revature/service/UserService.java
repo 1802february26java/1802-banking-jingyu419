@@ -5,6 +5,12 @@ import org.apache.log4j.Logger;
 import com.revature.exception.InvalidLoginException;
 import com.revature.model.User;
 
+/**
+ * 
+ * @author jingyu
+ * This class has all the necessary methods that top controller will use.
+ *
+ */
 public class UserService {
  
 	private static Logger logger = Logger.getLogger(UserService.class);
