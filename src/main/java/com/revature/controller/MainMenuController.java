@@ -80,6 +80,8 @@ public class MainMenuController{
 				
 		accountService.insertAccount(AccountService.AccountAction.INSERT, account);
 		
+		loggedInUserAccount = accountService.viewAccountBalance(AccountService.AccountAction.VIEW, loggedInUser);
+		
 		return registerSuccess;
 		
 	}
@@ -223,6 +225,7 @@ public class MainMenuController{
 			for(Account a: loggedInUserAccount){
 			    account = a;
 			}
+		
 			
 			account.setBalance(account.getBalance()+ Double.parseDouble(moneyToDeposit));
 			
@@ -235,7 +238,22 @@ public class MainMenuController{
 		}
 		
 		else{
-		logger.info("");
+		logger.info("You have multiple accounts. Which account you want to deposit?");
+		
+		Account account = multipleAccountUpdateHelper();
+		
+		logger.trace("We come back our multi account update helper class "+ account);
+		
+		account.setBalance(account.getBalance()+ Double.parseDouble(moneyToDeposit));
+		
+		logger.trace("We come back our multi account update helper class and update the balance"+ account);
+		  
+		deposit(account);
+		
+		logger.info("Balance has been update. Below is your new acccount information.");
+		
+		logger.info(viewBalance());
+		
 		}
 		
 	}
@@ -275,7 +293,16 @@ public class MainMenuController{
 		}
 		
 		else{
-		logger.info("");
+			
+			logger.info("You have multiple accounts. Which account you want to withdraw?");
+			
+			Account account = multipleAccountUpdateHelper();
+			
+			deposit(account);
+			
+			logger.info("Balance has been update. Below is your new acccount information.");
+			
+			logger.info(viewBalance());
 		}
 		
 	}
@@ -318,6 +345,42 @@ public class MainMenuController{
 			return true;
 		}
 		return false;
+		
+	}
+	
+	private Account multipleAccountUpdateHelper(){
+
+		boolean isThisAccountNameExisted = false;
+		
+		Account account = new Account();
+		
+		while(isThisAccountNameExisted == false){
+			
+		logger.info("Please type the account name: ");
+		
+		String accountName = scanner.nextLine();
+		
+		for(Account a : loggedInUserAccount){
+			
+		       isThisAccountNameExisted = a.getAccountName().equals(accountName);
+		       
+		       logger.trace(a.getAccountName()+ "input: "+accountName);
+		       
+		       if(isThisAccountNameExisted){
+		    	   logger.trace(a+"  "+isThisAccountNameExisted);
+		    	   account.setAccountName(a.getAccountName());
+		    	   account.setAccountId(a.getAccountId());
+		    	   account.setUserId(a.getUserId());
+		    	   account.setBalance(a.getBalance());
+		    	   break;
+		       }
+		     }
+			logger.info("You did not enter account name correctly.Try again.");
+		}
+		
+			logger.trace("Before return.Find the account information..."+account);
+		   return account;
+		
 		
 	}
 			
