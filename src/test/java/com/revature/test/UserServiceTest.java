@@ -76,22 +76,22 @@ public class UserServiceTest {
 		
 		
 		@Test
-		public void userSearchSuccessTest(){
+		public void userSearchTest(){
 			 
 			 logger.trace("Testing user Search.");
 			 
-			 boolean searchSuccessTest = false;
+			 boolean searchTest = false;
 		        
 		        try{
 		        	
-		        	searchSuccessTest = userServiceTest.userLogin(UserService.UserAction.LOGIN,
+		        	searchTest = userServiceTest.userLogin(UserService.UserAction.LOGIN,
 		        			userServiceTest.userSearch(UserService.UserAction.SEARCH, userTestSuccess));
 	        	
 		        }catch(InvalidLoginException e){
 		        	logger.info(e);
 		        }
 		        
-			 assertTrue(searchSuccessTest);
+			 assertTrue(searchTest);
 		}
 		
 }

@@ -14,7 +14,8 @@ public class AccountService {
 	  public static enum AccountAction {
 		  VIEW,
 		  DEPOSIT,
-		  WITHDRAW
+		  WITHDRAW,
+		  INSERT
 	  }
 	  
 	  public Set<Account> viewAccountBalance(AccountAction action, User user){
@@ -55,6 +56,17 @@ public class AccountService {
 		     }
 		    
 		     return updateSuccess;
+	  }
+	  
+	  public boolean insertAccount(AccountAction action, Account account){
+		  
+		  AccountInsertService accountInsert = new AccountInsertService();
+		  
+		  boolean insertSuccess;
+		  
+		  insertSuccess = accountInsert.accountInsert(account);
+		  
+		  return insertSuccess;
 	  }
 	  
 }

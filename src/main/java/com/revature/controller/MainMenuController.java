@@ -5,11 +5,12 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.revature.exception.InvalidLoginException;
+import com.revature.exception.InvalidMenuChoiceException;
 import com.revature.model.Account;
 import com.revature.model.User;
 import com.revature.service.AccountService;
 import com.revature.service.UserService;
-import com.revature.exception.InvalidLoginException;
 
 public class MainMenuController{
 
@@ -36,7 +37,14 @@ public class MainMenuController{
 		
 		String input = scanner.nextLine();
 		
-		loginOrRegister(input);
+		try{
+		loginOrRegister(input);}
+		catch(Exception e){
+			logger.info(e.getMessage());
+		}
+		finally{
+			initMainMenu();
+		}
 
 	}
 	
@@ -51,7 +59,7 @@ public class MainMenuController{
         	loginSuccess = userService.userLogin(UserService.UserAction.LOGIN,user);
         	
         }catch(InvalidLoginException e){
-        	logger.info(e);
+        	logger.info(e.getMessage());
         }
         
              logger.trace("login method: loginSuccess= "+loginSuccess);
@@ -62,7 +70,17 @@ public class MainMenuController{
 	
 	private boolean register(User user){
 		
-		return false;
+		boolean registerSuccess = false;
+		
+		registerSuccess = userService.userRegister(UserService.UserAction.REGISTER,user);
+		
+		loggedInUser = userService.userSearch(UserService.UserAction.SEARCH, user);
+		
+		Account account = new Account(null, loggedInUser.getUserId(), "Checking", 0D); 
+				
+		accountService.insertAccount(AccountService.AccountAction.INSERT, account);
+		
+		return registerSuccess;
 		
 	}
 	
@@ -94,7 +112,7 @@ public class MainMenuController{
 		accountService.withdrawAccount(AccountService.AccountAction.WITHDRAW, account);
 	}
 	
-	private void loginOrRegister(String input){
+	private void loginOrRegister(String input) throws InvalidMenuChoiceException{
 		
 		  if(input.equals("1")){
 				
@@ -116,10 +134,16 @@ public class MainMenuController{
 		}
 		  else if(input.equals("2")){
 			
+			      if(registerHelper()){
+			    	  logger.info("Your account has been created.");
+			    	  userMenu();
+			      }
+			       
 		}
+		  
 		else{
-			logger.info("Please enter either 1 or 2.");
-			initMainMenu();
+			 throw new InvalidMenuChoiceException("Wrong menu choice. Please enter either 1 or 2.");
+			
 		}
 		  
 	}
@@ -253,6 +277,47 @@ public class MainMenuController{
 		else{
 		logger.info("");
 		}
+		
+	}
+	
+	private boolean registerHelper(){
+		
+		boolean registerSuccess = false;
+		
+		logger.info("Please enter a username: ");
+		
+		String username = scanner.nextLine();
+		
+		if(isDuplicateUserName(username)){
+			logger.info("This username has been taken.");
+			registerHelper();
+		}
+		
+		logger.info("Please enter a password: ");
+		String password = scanner.nextLine();
+		
+		logger.info("Please enter your first name: ");
+		String firstname = scanner.nextLine();
+		
+		logger.info("Please enter your last name: ");
+		String lastname = scanner.nextLine();
+		
+		
+		User user = new User(null,firstname,lastname,username,password);
+		
+		registerSuccess = register(user);
+		
+		return registerSuccess;
+	}
+	
+	private boolean isDuplicateUserName(String username){
+		
+		User user = new User(null,"","",username,"");
+		
+		if(userService.userSearch(UserService.UserAction.SEARCH, user) != null){
+			return true;
+		}
+		return false;
 		
 	}
 			
