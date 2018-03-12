@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -75,7 +76,8 @@ public class TransactionRepositoryJdbc implements TransactionRepository {
 				set.add(new Transaction(
 						result.getLong("T_TRANSACTION_ID"),						
 						result.getLong("T_USER_ID"),
-						result.getDate("T_DATE_TIME"),
+						//result.getDate("T_DATE_TIME"),
+						timestampToDate(result.getTimestamp("T_DATE_TIME")),
 						result.getString("T_ACCOUNT_NAME"),
 						result.getString("T_ACTION"),
 						result.getDouble("T_AMOUNT")
@@ -91,13 +93,30 @@ public class TransactionRepositoryJdbc implements TransactionRepository {
 		
 		return null;
 	}
+	
+	private Date timestampToDate(Timestamp timestamp){
+		
+		Date date = new Date();
+		
+		if (timestamp != null){
+			
+		    date = new Date(timestamp.getTime());
+		    
+		}
+		
+		return date;
+		
+	}
+	
 	/*
 	public static void main(String[] args){
 		
 		TransactionRepositoryJdbc repository = new TransactionRepositoryJdbc();
 		logger.trace(repository.findAllTransaction(3L));
-		logger.trace(repository.insert(new Transaction(null,3L,null,"checking 1","WITHDRAW",150D)));
+		logger.trace(repository.insert(new Transaction(null,41L,null,"checking 1","WITHDRAW",150D)));
 	}
 	*/
+	
 
+	 
 }

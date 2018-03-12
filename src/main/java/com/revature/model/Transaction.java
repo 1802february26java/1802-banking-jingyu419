@@ -1,6 +1,5 @@
 package com.revature.model;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 public class Transaction {
